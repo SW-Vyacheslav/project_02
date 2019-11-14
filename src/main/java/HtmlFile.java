@@ -14,8 +14,12 @@ public class HtmlFile {
     }
 
     public void addBoldText(String text) {
+        addBoldText(text, "black");
+    }
+
+    public void addBoldText(String text, String color) {
         Div boldBlock = new Div();
-        boldBlock.setStyle("font-weight: bold;");
+        boldBlock.setStyle(String.format("font-weight: bold; color:%s", color));
         boldBlock.appendText(text);
         rootBlock.appendChild(boldBlock);
     }
@@ -26,22 +30,18 @@ public class HtmlFile {
         rootBlock.appendChild(textBlock);
     }
 
-    public void addTextWithLink(String text, String link) {
+    public void addLink(String text, String link) {
         Div wrapBlock = new Div();
         A linkBlock = new A();
         linkBlock.setHref(link);
+        linkBlock.setAttribute("target", "_blank");
         linkBlock.appendText(text);
         wrapBlock.appendChild(linkBlock);
         rootBlock.appendChild(wrapBlock);
     }
 
     public void addLink(String link) {
-        Div wrapBlock = new Div();
-        A linkBlock = new A();
-        linkBlock.setHref(link);
-        linkBlock.appendText(link);
-        wrapBlock.appendChild(linkBlock);
-        rootBlock.appendChild(wrapBlock);
+        addLink(link, link);
     }
 
     public void save() throws IOException {
